@@ -586,7 +586,8 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'shfmt',
+        'shfmt', -- Used for bash
+        'djlint', -- Used for HTML
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -633,6 +634,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         sh = { 'shfmt' },
+        html = { 'djlint' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
