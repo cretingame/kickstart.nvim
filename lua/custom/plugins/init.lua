@@ -7,22 +7,45 @@ return {
     'barrett-ruth/live-server.nvim',
     keys = {
       {
-        '<leader>p',
+        '<leader>po',
         function()
           require('live-server').start()
         end,
-        desc = 'live server start',
+        desc = '[P]review [O]pen (live server)',
       },
       {
-        '<leader>x',
+        '<leader>pc',
         function()
           require('live-server').stop()
         end,
-        desc = 'live server stop',
+        desc = '[P]review [C]lose (live server)',
+      },
+      {
+        '<leader>ph',
+        function()
+          require('live-server').toggle()
+        end,
+        desc = '[P]review [H]TML toggle (live server)',
       },
     },
     build = 'pnpm add -g live-server',
     cmd = { 'LiveServerStart', 'LiveServerStop' },
     config = true,
+    ft = { 'html' },
+  },
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    keys = {
+      {
+        '<leader>pm',
+        '<cmd>MarkdownPreviewToggle<cr>',
+        desc = '[P]review [M]ardwon Toggle',
+      },
+    },
+    config = function()
+      vim.fn['mkdp#util#install']()
+    end,
+    ft = { 'markdown' },
   },
 }
