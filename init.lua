@@ -637,6 +637,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         sh = { 'shfmt' },
         html = { 'djlint' },
+        go = { 'gofmt', 'goimports' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
