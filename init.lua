@@ -296,8 +296,10 @@ require('lazy').setup({
       require('which-key').register {
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+        ['<leader>p'] = { name = '[P]review', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]odo', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
       }
     end,
@@ -791,7 +793,43 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = { signs = false },
+    keys = {
+      {
+        '<leader>tl',
+        '<cmd>TodoLocList<cr>',
+        desc = '[T]odo [L]oc List',
+      },
+      {
+        '<leader>tn',
+        function()
+          require('todo-comments').jump_next()
+        end,
+        desc = '[T]odo [N]ext',
+      },
+      {
+        '<leader>tp',
+        function()
+          require('todo-comments').jump_prev()
+        end,
+        desc = '[T]odo [P]revious',
+      },
+      {
+        '<leader>tq',
+        '<cmd>TodoQuickFix<cr>',
+        desc = '[T]odo [Q]uick Fix',
+      },
+      {
+        '<leader>tt',
+        '<cmd>TodoTelescope<cr>',
+        desc = '[T]odo [T]elescope',
+      },
+    },
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
