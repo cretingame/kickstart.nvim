@@ -154,6 +154,13 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldcolumn = '0'
+vim.opt.foldtext = ''
+vim.opt.foldlevel = 99
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -548,6 +555,7 @@ require('lazy').setup({
         clangd = {},
         gopls = {},
         html = {},
+        -- harper_ls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -590,6 +598,8 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'shfmt', -- Used for bash
         'djlint', -- Used for HTML
+        'clangd',
+        'clang-format',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -622,7 +632,7 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -638,12 +648,21 @@ require('lazy').setup({
         sh = { 'shfmt' },
         html = { 'djlint' },
         go = { 'gofmt', 'goimports' },
+        c = { 'clang_format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+      },
+      formatters = {
+        clang_format = {
+          prepend_args = { '--style=file', '--fallback-style=LLVM' },
+        },
+        shfmt = {
+          prepend_args = { '-i', '4' },
+        },
       },
     },
   },
