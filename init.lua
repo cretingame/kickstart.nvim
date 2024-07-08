@@ -543,6 +543,12 @@ require('lazy').setup({
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      -- bitbake is not managed by Mason
+      -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bitbake_ls
+      -- TODO: Setup bitbake_language_server
+      require('lspconfig').bitbake_language_server.setup {
+        cmd = { 'language-server-bitbake', '--stdio' },
+      }
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -555,9 +561,13 @@ require('lazy').setup({
       local servers = {
         bashls = {},
         clangd = {},
+        -- Not ready for installed
+        -- gitlab_ci_ls = {},
         gopls = {},
         html = {},
-        -- harper_ls = {},
+        harper_ls = {
+          filetypes = { 'md', 'txt' },
+        },
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
