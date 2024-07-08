@@ -673,7 +673,7 @@ require('lazy').setup({
           prepend_args = { '--style=file', '--fallback-style=LLVM' },
         },
         shfmt = {
-          prepend_args = { '-i', '4' },
+          prepend_args = { '-i', '2', '-ci' },
         },
       },
     },
