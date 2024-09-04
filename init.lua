@@ -549,6 +549,12 @@ require('lazy').setup({
       require('lspconfig').bitbake_language_server.setup {
         cmd = { 'language-server-bitbake', '--stdio' },
       }
+
+      require('lspconfig').ginko_ls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -561,6 +567,10 @@ require('lazy').setup({
       local servers = {
         bashls = {},
         clangd = {},
+        -- ginko_ls = {
+        --   on_attach = on_attach,
+        --   capabilities = capabilities,
+        -- },
         -- Not ready for installed
         -- gitlab_ci_ls = {},
         gopls = {},
@@ -612,6 +622,7 @@ require('lazy').setup({
         'djlint', -- Used for HTML
         'clangd',
         'clang-format',
+        'ginko_ls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
