@@ -577,7 +577,12 @@ require('lazy').setup({
         gopls = {},
         html = {},
         harper_ls = {
-          filetypes = { 'md', 'txt' },
+          filetypes = { 'markdown', 'text' },
+          settings = {
+            ['harper-ls'] = {
+              userDictPath = '~/.config/harper-ls/dict.txt',
+            },
+          },
         },
         -- pyright = {},
         -- rust_analyzer = {},
