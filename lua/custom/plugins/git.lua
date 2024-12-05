@@ -1,3 +1,5 @@
+-- Ctrl-C + the mappings
+
 return {
   {
     'akinsho/git-conflict.nvim',
