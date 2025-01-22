@@ -545,10 +545,10 @@ require('lazy').setup({
 
       -- bitbake is not managed by Mason
       -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bitbake_ls
-      -- TODO: Setup bitbake_language_server
-      require('lspconfig').bitbake_language_server.setup {
-        cmd = { 'language-server-bitbake', '--stdio' },
-      }
+      -- NOTE: I'm not usint it any more
+      -- require('lspconfig').bitbake_language_server.setup {
+      --   cmd = { 'language-server-bitbake', '--stdio' },
+      -- }
 
       -- NOTE: A ugly way to add
       -- require('lspconfig').ginko_ls.setup {
@@ -577,7 +577,7 @@ require('lazy').setup({
         gopls = {},
         html = {},
         harper_ls = {
-          filetypes = { 'markdown', 'text' },
+          filetypes = { 'markdown', 'text', 'sh' },
           settings = {
             ['harper-ls'] = {
               userDictPath = '~/.config/harper-ls/dict.txt',
