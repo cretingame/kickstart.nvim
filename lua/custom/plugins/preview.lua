@@ -29,6 +29,7 @@ return {
     config = true,
     ft = { 'html' },
   },
+  -- OPTIM: I will migrate to peek.nvim, but I didn't find the toggle function.
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
@@ -43,5 +44,23 @@ return {
       vim.fn['mkdp#util#install']()
     end,
     ft = { 'markdown' },
+  },
+
+  -- NOTE: peek.nvim needs deno as dependency
+  -- I installed with this command:
+  -- `npm install -g deno`
+  -- Following this documentation
+  -- https://docs.deno.com/runtime/getting_started/installation/
+  -- OPTIM: I should add the key shortcuts, otherwise this plugin seems amazing
+  -- TODO: Adding key shortcuts
+  {
+    'toppair/peek.nvim',
+    event = { 'VeryLazy' },
+    build = 'deno task --quiet build:fast',
+    config = function()
+      require('peek').setup()
+      vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+      vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+    end,
   },
 }
