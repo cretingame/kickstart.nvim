@@ -29,17 +29,17 @@ return {
     config = true,
     ft = { 'html' },
   },
-  -- OPTIM: I will migrate to peek.nvim, but I didn't find the toggle function.
+  -- NOTE: I'm using peek.nvim instead of this plugin
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    keys = {
-      {
-        '<leader>pm',
-        '<cmd>MarkdownPreviewToggle<cr>',
-        desc = '[P]review [M]ardwon Toggle',
-      },
-    },
+    -- keys = {
+    --   {
+    --     '<leader>pm',
+    --     '<cmd>MarkdownPreviewToggle<cr>',
+    --     desc = '[P]review [M]ardwon Toggle',
+    --   },
+    -- },
     config = function()
       vim.fn['mkdp#util#install']()
     end,
@@ -51,8 +51,7 @@ return {
   -- `npm install -g deno`
   -- Following this documentation
   -- https://docs.deno.com/runtime/getting_started/installation/
-  -- OPTIM: I should add the key shortcuts, otherwise this plugin seems amazing
-  -- TODO: Adding key shortcuts
+  -- TESTING: I need to test how peek.nvim deal with mermaid.js
   {
     'toppair/peek.nvim',
     event = { 'VeryLazy' },
@@ -62,5 +61,20 @@ return {
       vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
       vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
     end,
+    ft = { 'markdown' },
+    keys = {
+      {
+        '<leader>pm',
+        function()
+          local peek = require 'peek'
+          if peek.is_open() then
+            peek.close()
+          else
+            peek.open()
+          end
+        end,
+        desc = '[P]review [M]ardwon Toggle',
+      },
+    },
   },
 }
