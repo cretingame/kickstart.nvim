@@ -162,10 +162,10 @@ vim.opt.foldtext = ''
 vim.opt.foldlevel = 99
 
 -- https://www.reddit.com/r/neovim/comments/vxqt95/how_to_set_tab_spaces_to_2/
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.bo.softtabstop = 2
+vim.bo.softtabstop = 4
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -696,6 +696,9 @@ require('lazy').setup({
           prepend_args = { '--style=file', '--fallback-style=LLVM' },
         },
         shfmt = {
+          -- FIXME: The indentation sucks, it always do the opposite of the argument
+          -- When I set to '2', after a return I get a 4 space width
+          -- When I set to '4', afert a return I get a 2 space width
           prepend_args = { '-i', '2', '-ci' },
         },
       },
@@ -880,7 +883,12 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
+      -- NOTE: I disabled 'init.surround' because it enters in conflict
+      -- with the subsititute feature
+      -- https://github.com/nvim-lua/kickstart.nvim/issues/1328
+      -- https://github.com/echasnovski/mini.nvim/issues/877#issuecomment-2107402139
+      -- I don't need this plugin yet, so I prefer to disable it.
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
