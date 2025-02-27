@@ -151,21 +151,24 @@ vim.opt.inccommand = 'split'
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
+-- Show which column your cursor is on
+vim.opt.cursorcolumn = true
+
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
 -- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldcolumn = '0'
-vim.opt.foldtext = ''
-vim.opt.foldlevel = 99
+-- vim.opt.foldmethod = 'expr'
+-- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- vim.opt.foldcolumn = '0'
+-- vim.opt.foldtext = ''
+-- vim.opt.foldlevel = 99
 
 -- https://www.reddit.com/r/neovim/comments/vxqt95/how_to_set_tab_spaces_to_2/
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.bo.softtabstop = 4
+-- vim.opt.tabstop = 4
+-- vim.opt.shiftwidth = 4
+-- vim.opt.expandtab = true
+-- vim.bo.softtabstop = 4
 
 vim.opt.colorcolumn = '80'
 
@@ -580,9 +583,9 @@ require('lazy').setup({
         --   on_attach = on_attach,
         --   capabilities = capabilities,
         -- },
-        -- Not ready for installed
+        -- Not ready for installlation
         -- gitlab_ci_ls = {},
-        gopls = {},
+        -- gopls = {}, -- I want to test x-ray/go.nvim
         html = {},
         harper_ls = {
           filetypes = { 'markdown', 'text', 'sh' },
@@ -684,7 +687,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         sh = { 'shfmt' },
         html = { 'djlint' },
-        go = { 'gofmt', 'goimports' },
+        go = { 'gofmt', 'goimports' }, -- I want to test x-ray/go.nvim
         c = { 'clang_format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
