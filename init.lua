@@ -624,7 +624,7 @@ require('lazy').setup({
         -- },
         -- Not ready for installlation
         -- gitlab_ci_ls = {},
-        -- gopls = {}, -- I want to test x-ray/go.nvim
+        gopls = {},
         html = {},
         harper_ls = {
           filetypes = { 'markdown', 'text', 'sh' },
