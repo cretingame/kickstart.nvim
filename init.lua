@@ -644,6 +644,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        eslint = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -678,6 +679,7 @@ require('lazy').setup({
         'djlint', -- Used for HTML
         'clangd',
         'clang-format',
+        'prettier',
         -- 'ginko_ls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -728,6 +730,8 @@ require('lazy').setup({
         html = { 'djlint' },
         go = { 'gofmt', 'goimports' }, -- I want to test x-ray/go.nvim
         c = { 'clang_format' },
+        javascript = { 'prettier' },
+        css = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
