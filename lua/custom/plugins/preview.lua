@@ -23,6 +23,7 @@ return {
   -- Following this documentation
   -- https://docs.deno.com/runtime/getting_started/installation/
   -- TESTING: I need to test how peek.nvim deal with mermaid.js
+  -- WARN: I got errors in log because of `DENO_ENV` is not set
   {
     'toppair/peek.nvim',
     event = { 'VeryLazy' },
@@ -32,6 +33,7 @@ return {
       vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
       vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
     end,
+    app = { 'chromium', '--new-window' },
     ft = { 'markdown' },
     keys = {
       {
@@ -45,6 +47,22 @@ return {
           end
         end,
         desc = '[P]review [M]ardwon Toggle',
+      },
+      {
+        '<leader>po',
+        function()
+          local peek = require 'peek'
+          peek.open()
+        end,
+        desc = 'Preview Mardwon [O]pen',
+      },
+      {
+        '<leader>pc',
+        function()
+          local peek = require 'peek'
+          peek.close()
+        end,
+        desc = 'Preview Mardwon [C]lose',
       },
     },
   },
