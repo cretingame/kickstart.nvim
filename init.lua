@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -671,8 +671,9 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
+        bashls = {},
+        clangd = {},
+        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -716,6 +717,9 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'shfmt', -- Used for bash
+        'clangd',
+        'clang-format',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -768,11 +772,24 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        sh = { 'shfmt' },
+        go = { 'gofmt', 'goimports' }, -- I want to test x-ray/go.nvim
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+      formatters = {
+        clang_format = {
+          prepend_args = { '--style=file', '--fallback-style=LLVM' },
+        },
+        shfmt = {
+          -- FIXME: The indentation sucks, it always do the opposite of the argument
+          -- When I set to '2', after a return I get a 4 space width
+          -- When I set to '4', afert a return I get a 2 space width
+          prepend_args = { '-i', '2', '-ci' },
+        },
       },
     },
   },
@@ -917,7 +934,12 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
+      -- NOTE: I disabled 'init.surround' because it enters in conflict
+      -- with the subsititute feature
+      -- https://github.com/nvim-lua/kickstart.nvim/issues/1328
+      -- https://github.com/echasnovski/mini.nvim/issues/877#issuecomment-2107402139
+      -- I don't need this plugin yet, so I prefer to disable it.
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
