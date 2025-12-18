@@ -672,6 +672,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         bashls = {},
+        neocmakelsp = {},
         clangd = {},
         gopls = {},
         -- pyright = {},
@@ -775,6 +776,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         sh = { 'shfmt' },
         go = { 'gofmt', 'goimports' }, -- I want to test x-ray/go.nvim
+        cmake = { 'gersemi' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -790,6 +792,9 @@ require('lazy').setup({
           -- When I set to '2', after a return I get a 4 space width
           -- When I set to '4', afert a return I get a 2 space width
           prepend_args = { '-i', '2', '-ci' },
+        },
+        gersemi = {
+          prepend_args = { '--indent', '2' },
         },
       },
     },
