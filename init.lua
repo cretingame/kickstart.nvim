@@ -698,6 +698,14 @@ do
     clangd = {},
     gopls = {},
 
+    -- Not available via Mason; install manually with:
+    --    go install github.com/owenrumney/make-ls/cmd/make-ls@latest
+    make_ls = {
+      cmd = { 'make-ls' },
+      filetypes = { 'make' },
+      root_markers = { 'GNUmakefile', 'makefile', 'Makefile' },
+    },
+
     -- pyright = {},
     -- rust_analyzer = {},
     --
@@ -765,6 +773,8 @@ do
   --
   -- You can press `g?` for help in this menu.
   local ensure_installed = vim.tbl_keys(servers or {})
+  -- Exclude servers that are not Mason packages (e.g. make_ls)
+  ensure_installed = vim.tbl_filter(function(name) return name ~= 'make_ls' end, ensure_installed)
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
   })
