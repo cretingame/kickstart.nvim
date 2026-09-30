@@ -697,6 +697,7 @@ do
     bashls = {},
     clangd = {},
     gopls = {},
+    roslyn_ls = {},
 
     -- Not available via Mason; install manually with:
     --    go install github.com/owenrumney/make-ls/cmd/make-ls@latest
@@ -813,7 +814,7 @@ do
     },
     -- You can also specify external formatters in here.
     formatters_by_ft = {
-      html = {"prettierd"},
+      html = { 'prettierd' },
       -- rust = { 'rustfmt' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
